@@ -34,7 +34,7 @@ class JoinGroup(LoginRequiredMixin, generic.RedirectView):
         group = get_object_or_404(Group, slug=self.kwargs.get('slug'))
 
         try:
-            GroupMember.objects.creare(user=self.request.user, group=group)
+            GroupMember.objects.create(user=self.request.user, group=group)
         except IntegrityError:
             messages.warning(self.request, 'Warning already a member!')
         else:
@@ -53,7 +53,7 @@ class LeaveGroup(LoginRequiredMixin, generic.RedirectView):
     def get(self, request, *args, **kwargs):
 
         try:
-            membership = models.GroupMember.objects.filter(
+            membership = GroupMember.objects.filter(
                 user=self.request.user,
                 group__slug=self.kwargs.get('slug')
             ).get()

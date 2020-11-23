@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.http import Http404
@@ -17,9 +18,14 @@ class PostList(SelectRelatedMixin, generic.ListView):
     model = models.Post
     select_related = ('user', 'group')
 
+
+class UserPosts(generic.ListView):
+    model = models.Post
+    template_name = 'posts/user_post_list.html'
+
     def get_queryset(self):
         try:
-            self.post.user = User.objects.prefetch_related('posts').get(
+            self.post_user = User.objects.prefetch_related('posts').get(
                 username__iexact=self.kwargs.get('username'))
         except User.DoesNotExist:
             raise Http404
@@ -33,7 +39,7 @@ class PostList(SelectRelatedMixin, generic.ListView):
 
 
 class PostDetail(SelectRelatedMixin, generic.DetailView):
-    model = model.Post
+    model = models.Post
     select_related = ('user', 'group')
 
     def get_queryset(self):
@@ -53,7 +59,7 @@ class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DetailView):
+class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
     model = models.Post
     select_related = ('user', 'group')
     success_url = reverse_lazy('posts:all')
