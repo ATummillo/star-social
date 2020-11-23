@@ -34,7 +34,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="{% static 'css/master.css'%}" />
+    <link rel="stylesheet" href="{% static 'starsocial/css/master.css'%}" />
   </head>
   <body>
     <nav class="navbar mynav" role="navigation" id="navbar">
@@ -58,5 +58,7 @@
     <div class="container mycontent">
       {% block content %} {% endblock content %}
     </div>
+    <canvas id="canvas"></canvas>
   </body>
+  <script type="text/javascript" src="{% static 'starsocial/js/master.js' %}"></script>
 </html>
