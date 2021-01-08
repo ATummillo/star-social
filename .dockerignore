@@ -1,0 +1,12 @@
+.env
+.vscode
+**/__pycache__
+env
+node_modules
+assets/css/style.**
+.git
+.gitignore
+db.sqlite3
+LICENSE
+README.md
+static
