@@ -1,6 +1,7 @@
 .mycontent {
   padding-top: 100px;
   border: 10px solid red;
+  position: absolute;
 }
 
 html,

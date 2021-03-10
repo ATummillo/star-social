@@ -12,9 +12,9 @@ RUN apk del .tmp-build-deps
 
 WORKDIR /starsocial
 COPY ./starsocial /starsocial
+COPY ./build_commands.sh /starsocial
 
 RUN mkdir -p /vol/web/static
-RUN python manage.py collectstatic --no-input
 RUN adduser -D myuser
 RUN chown -R myuser:myuser /vol/
 RUN chmod -R 755 /vol/web

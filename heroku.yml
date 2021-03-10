@@ -1,9 +1,5 @@
 build:
   docker:
     web: Dockerfile
-release:
-  image: web
-  command:
-    - python manage.py migrate
 run:
-  web: gunicorn starsocial.wsgi:application --bind 0.0.0.0:$PORT
+  web: sh -c "python manage.py wait_for_db && ./build_commands.sh && gunicorn starsocial.wsgi:application --bind 0.0.0.0:$PORT"

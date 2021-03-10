@@ -7,11 +7,16 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./starsocial:/starsocial
+      - ./starsocial/accounts:/starsocial/accounts
+      - ./starsocial/groups:/starsocial/groups
+      - ./starsocial/posts:/starsocial/posts
+      - ./starsocial/starsocial:/starsocial/starsocial
+      - ./starsocial/static:/starsocial/static
+      - ./starsocial/templates:/starsocial/templates
     command: >
-      sh -c "python manage.py wait_for_db && 
-             python manage.py migrate &&
-             gunicorn starsocial.wsgi:application --bind 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+      ./build_commands.sh &&
+      python manage.py runserver 0.0.0.0:8000"
     environment:
       - DEBUG=1
       - DB_HOST=db
