@@ -1,6 +1,6 @@
 # Star Social
 
-![Image](https://drive.google.com/uc?export=view&id=1c-GUpXXMHk5pfWwp9bZQTGPbPoltwFgq)
+![Image](./star-social_README.png)
 
 > A social media site that is intended for lovers of space exploration! It also features an interactive Canvas animation.
 
